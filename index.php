@@ -6,6 +6,8 @@ function endsWith($haystack, $needle)
 }
 $DEBUGGING = endsWith(ROOT_PATH,"-dev");
 
+if ($DEBUGGING) { print "Debugging."; } else { print "NOT debugging."; }
+
 $consoles = array(
     array("ps3", "PlayStation 3", "http://uvm.edu/address/to/ps3/mac/address/help"),
     array("ps4", "PlayStation 4", "http://"),
