@@ -1,0 +1,40 @@
+.jumbotron {
+    background-color:rgb(98, 133, 91);
+    color:rgb(233, 233, 233);
+    text-align:center;
+    font-family: Lato, 'Helvetica Neue', Arial, Helvetica, Geneva, sans-serif;
+    font-weight: 100;
+}
+
+.select-lg {
+    font-size: 18px;
+    padding: 10px 16px;
+}
+
+#groupOtherConsole {
+    display:none;
+}
+
+#groupMacAddress {
+    display:none;
+}
+
+#groupSubmitButton {
+    display:none;
+}
+#groupMacAddress .alert {
+    padding-top: 20px;
+    display:none;
+}
+#groupMacAddress.has-error .alert-danger {
+    display:block;
+}
+#groupMacAddress.has-warning .alert-warning {
+    display:block;
+}
+#groupMacAddress.has-success .alert-success {
+    display:block;
+}
+/*.has-error .col-sm-4 {*/
+        /*font-size:20px;*/
+/*}*/
