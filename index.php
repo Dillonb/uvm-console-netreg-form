@@ -1,4 +1,11 @@
 <?php
+define(ROOT_PATH, dirname(__FILE__));
+function endsWith($haystack, $needle)
+{
+        return $needle === "" || substr($haystack, -strlen($needle)) == $needle;
+}
+$DEBUGGING = endsWith(ROOT_PATH,"-dev");
+
 $consoles = array(
     array("ps3", "PlayStation 3", "http://uvm.edu/address/to/ps3/mac/address/help"),
     array("ps4", "PlayStation 4", "http://"),
@@ -104,11 +111,57 @@ EOT;
 <?php
 }
 elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
-//print_r($_REQUEST);
-//print_r($_SERVER);
+$consoletype = $_REQUEST['consoletype'];
+
+$otherconsole = $_REQUEST['otherconsole'];
+
+$macaddress = $_REQUEST['macaddress'];
+$macaddress = preg_replace("/[^\w\d ]/ui", '', $macaddress);
+$macaddress = implode(str_split($macaddress,2),"-");
+$macaddress = strtoupper($macaddress);
+
+$oui_file = file("oui.txt");
+$oui = array();
+
+foreach ($oui_file as $line) {
+    $line = explode(" ",$line,2);
+    $oui[$line[0]] = $line[1];
+}
+$macaddress_oui = substr($macaddress, 0, 8);
+if (array_key_exists($macaddress_oui, $oui)) {
+    $macaddress_oui = $oui[$macaddress_oui];
+}
+else {
+    $macaddress_oui = "UNKNOWN";
+}
+
+$date = date("r");
+
+$headers = <<<EOT
+MIME-Version: 1.0
+Content-type: text/html; charset=iso-8859-1
+From: {$_SERVER['WEBAUTH_LDAP_MAIL']}
+EOT;
+$subject = "Netreg request from " . $_SERVER['WEBAUTH_USER'];
+
+$message = <<<EOT
+<p>Request submitted at {$date} by user {$_SERVER['WEBAUTH_LDAP_CN']}</p>
+<p>NetID: {$_SERVER['WEBAUTH_USER']}</p>
+<p>Console Type: {$consoletype}</p>
+<p>Specify: {$otherconsole}</p>
+<p>MAC address: {$macaddress}</p>
+<p>Manufacturer: {$macaddress_oui}</p>
+EOT;
+
+if ($DEBUGGING) {
+    $to = "netregformdebug@dillonbeliveau.com";
+}
+else {
+    $to = "helpline@uvm.edu";
+}
+
+mail("netregformdebug@dillonbeliveau.com", $subject, $message, $headers);
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -133,57 +186,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == "POST") {
     <body>
         <pre>
 <?php
-    $consoletype = $_REQUEST['consoletype'];
-
-    $otherconsole = $_REQUEST['otherconsole'];
-
-    $macaddress = $_REQUEST['macaddress'];
-    $macaddress = preg_replace("/[^\w\d ]/ui", '', $macaddress);
-    $macaddress = implode(str_split($macaddress,2),"-");
-    $macaddress = strtoupper($macaddress);
-
-    $oui_file = file("oui.txt");
-    $oui = array();
-
-    foreach ($oui_file as $line) {
-        $line = explode(" ",$line,2);
-        $oui[$line[0]] = $line[1];
-    }
-    $macaddress_oui = substr($macaddress, 0, 8);
-    if (array_key_exists($macaddress_oui, $oui)) {
-        $macaddress_oui = $oui[$macaddress_oui];
-    }
-    else {
-        $macaddress_oui = "UNKNOWN";
-    }
-
-    //print_r($macaddress);
-    //print_r($_SERVER);
-
-    $date = date("r");
-
-    //print_r($date);
-
-    $headers = <<<EOT
-MIME-Version: 1.0
-Content-type: text/html; charset=iso-8859-1
-From: {$_SERVER['WEBAUTH_LDAP_MAIL']}
-EOT;
-    $subject = "Netreg request from " . $_SERVER['WEBAUTH_USER'];
-
-    $message = <<<EOT
-<p>Request submitted at {$date} by user {$_SERVER['WEBAUTH_LDAP_CN']}</p>
-<p>NetID: {$_SERVER['WEBAUTH_USER']}</p>
-<p>Console Type: {$consoletype}</p>
-<p>Specify: {$otherconsole}</p>
-<p>MAC address: {$macaddress}</p>
-<p>Manufacturer: {$macaddress_oui}</p>
-EOT;
-
-    mail("netregformdebug@dillonbeliveau.com", $subject, $message, $headers);
-
-    print $message;
-
+print $message;
 ?>
         </pre>
     </body>
