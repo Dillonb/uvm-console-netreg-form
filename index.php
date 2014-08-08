@@ -117,6 +117,7 @@ $otherconsole = $_REQUEST['otherconsole'];
 
 $macaddress = $_REQUEST['macaddress'];
 $macaddress = preg_replace("/[^\w\d ]/ui", '', $macaddress);
+$macaddress = str_replace(" ", "", $macaddress);
 $macaddress = implode(str_split($macaddress,2),"-");
 $macaddress = strtoupper($macaddress);
 
@@ -136,7 +137,6 @@ else {
 }
 
 $date = date("r");
-
 $headers = <<<EOT
 MIME-Version: 1.0
 Content-type: text/html; charset=iso-8859-1
