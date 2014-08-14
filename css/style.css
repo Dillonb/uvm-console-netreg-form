@@ -11,6 +11,9 @@
     padding: 10px 16px;
 }
 
+#groupSelectConsole {
+    display:none;
+}
 #groupOtherConsole {
     display:none;
 }
@@ -25,6 +28,9 @@
 #groupMacAddress .alert {
     padding-top: 20px;
     display:none;
+}
+#groupMacAddress .alert.alert-info#machelp {
+    display:block;
 }
 #groupMacAddress.has-error .alert-danger {
     display:block;
