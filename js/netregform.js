@@ -44,7 +44,6 @@ jQuery(document).ready(function($) {
                     var selectedOption = $("#inputConsoleType option:selected");
                     $("#machelp").html('Click <a href="' + selectedOption.data("machelp") + '">here</a> for instructions on finding the MAC address for your ' + selectedOption.text() + '.');
                 }
-                console.log("Calling scrollTo");
                 $.scrollTo($("#groupMacAddress"), 800);
             });
         $("#inputMacAddress").keyup(function() {
@@ -64,7 +63,6 @@ jQuery(document).ready(function($) {
                         // Valid MAC address
                         if (setStatus($("#groupMacAddress"), "success")) {
                             $("#groupSubmitButton").fadeIn("slow");
-                            console.log("Calling scrollTo");
                             $.scrollTo($("#groupSubmitButton"), 800);
                         }
                     }
@@ -80,7 +78,6 @@ jQuery(document).ready(function($) {
 
         $("#btnWiredAgree").click(function() {
                 $("#groupSelectConsole").fadeIn("slow");
-                console.log("Calling scrollTo");
                 $.scrollTo($('#groupSelectConsole'), 800);
             });
 });
