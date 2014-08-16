@@ -7,11 +7,13 @@ function endsWith($haystack, $needle)
 $DEBUGGING = endsWith(ROOT_PATH,"-dev");
 
 $consoles = array(
-    array("ps3", "PlayStation 3", "http://uvm.edu/address/to/ps3/mac/address/help"),
-    array("ps4", "PlayStation 4", "http://"),
-    array("xbox360", "Xbox 360", "http://"),
-    array("xboxone", "Xbox One", "http://"),
-    array("appletv", "Apple TV", "http://"),
+    array("ps3", "PlayStation 3", "https://www.uvm.edu/techteam/playstation-3/"),
+    array("ps4", "PlayStation 4", "https://www.uvm.edu/techteam/playstation-4/"),
+    array("xbox360", "Xbox 360", "https://www.uvm.edu/techteam/xbox-360/"),
+    array("xboxone", "Xbox One", "https://www.uvm.edu/techteam/xbox-one-locate-your-wired-mac-address/"),
+    array("appletv", "Apple TV", "https://www.uvm.edu/techteam/apple-tv/"),
+    array("wii", "Wii", "https://www.uvm.edu/techteam/wii/"),
+    array("wiiu", "Wii U", "https://www.uvm.edu/techteam/wii-u/"),
     array("other", "Other", ""),
 );
 ?>
