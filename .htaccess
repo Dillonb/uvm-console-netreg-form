@@ -1,3 +1,2 @@
 AuthType WebAuth
 Require valid-user
-WebAuthReturnURL https://helpline.w3.uvm.edu/playonline/
