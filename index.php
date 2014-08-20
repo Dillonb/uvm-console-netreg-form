@@ -154,10 +154,14 @@ else {
 }
 
 $date = date("r");
+$fromaddress = $_SERVER['WEBAUTH_LDAP_MAIL']; // This field doesn't exist on silk yet
+if (empty($fromaddress)) { // Fallback in case that field did not get populated (it will not on Silk)
+    $fromaddress = $_SERVER['WEBAUTH_USER'] . "@uvm.edu"; // Use netid@uvm.edu
+}
 $headers = <<<EOT
 MIME-Version: 1.0
 Content-type: text/html; charset=iso-8859-1
-From: {$_SERVER['WEBAUTH_LDAP_MAIL']}
+From: {$fromaddress}
 EOT;
 $subject = "Netreg request from " . $_SERVER['WEBAUTH_USER'];
 
