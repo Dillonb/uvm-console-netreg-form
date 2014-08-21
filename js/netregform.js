@@ -42,7 +42,7 @@ jQuery(document).ready(function($) {
                 else {
                     $("#groupOtherConsole").fadeOut("slow");
                     var selectedOption = $("#inputConsoleType option:selected");
-                    $("#machelp").html('Click <a href="' + selectedOption.data("machelp") + '">here</a> for instructions on finding the MAC address for your ' + selectedOption.text() + '.');
+                    $("#machelp").html('Click <a href="' + selectedOption.data("machelp") + '" target="_blank">here</a> for instructions on finding the MAC address for your ' + selectedOption.text() + '.');
                 }
                 $.scrollTo($("#groupMacAddress"), 800);
             });
